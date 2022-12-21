@@ -1,18 +1,19 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    {{ data }}
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+  export default {
+    data() {
+      return {
+        data: undefined
+      }
+    },
+    async mounted() {
+      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+      this.data = await response.json()
+    }
   }
-}
 </script>
